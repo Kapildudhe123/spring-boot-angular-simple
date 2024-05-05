@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+
+<h3 *ngIf="form.id!=null" style="color: navy;" align="center">Update User</h3>
+<h3 *ngIf="form.id==null" style="color: navy;" align="center">Add User</h3>
+<div style="color: green;" align="center">{{form.message}}</div>
+
+
+<table align="center">
+    <tr>
+        <th>FirstName: </th>
+        <td><input type="text" [(ngModel)]="form.firstName" name="firstName" /> </td>
+
+        <div style="color: red;">
+            <td *ngIf="inputerror.firstName!=null">{{inputerror.firstName}}</td>
+        </div>
+    </tr>
+    <tr>
+        <th>LastName: </th>
+        <td><input type="text" [(ngModel)]="form.lastName" name="lastName" /> </td>
+
+        <div style="color: red;">
+            <td *ngIf="inputerror.lastName!=null">{{inputerror.lastName}}</td>
+        </div>
+
+    </tr>
+    <tr>
+        <th>LoginId: </th>
+        <td><input type="text" [(ngModel)]="form.loginId" name="loginId" /></td>
+        <div style="color: red;">
+            <td *ngIf="inputerror.loginId!=null">{{inputerror.loginId}}</td>
+        </div>
+
+    </tr>
+    <tr>
+        <th>Password: </th>
+        <td><input type="text" [(ngModel)]="form.password" name="password" /></td>
+        <div style="color: red;">
+            <td *ngIf="inputerror.password!=null">{{inputerror.password}}</td>
+        </div>
+
+    </tr>
+    <tr>
+        <th>RoleName: </th>
+        <td> <select name="roleId" [(ngModel)]="form.roleId">
+                <option [ngValue]="" value="undefined">{{'------Select Role-------' }}</option>
+                <option *ngFor="let obj of form.preload.roleList" [value]="obj.key">{{obj.value}}</option>
+            </select></td>
+        <div style="color: red;">
+            <td *ngIf="inputerror.roleId!=null">{{inputerror.roleId}}</td>
+        </div>
+    </tr>
+
+    <tr>
+        <th>DOB: </th>
+        <td *ngIf="form.id==null"><input type="date" [(ngModel)]="form.dob" name="dob" /> </td>
+        <td *ngIf="form.id!=null"><input type="text" [(ngModel)]="form.dob" name="dob" /> </td>
+        <div style="color: red;">
+            <td *ngIf="inputerror.dob!=null">{{inputerror.dob}}</td>
+        </div>
+
+    </tr>
+    <tr>
+        <th>ProfilePic:</th>
+        <td><img src="http://localhost:8080/User/profilePic/{{form.id}}" height="55px" width="80px"></td>
+    </tr>
+    <tr>
+        <th>Image:</th>
+        <td> <input type="file" id="customFile" name="imageId" (change)="fileSelect($event)" accept="image/*"></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td *ngIf="form.id!=null"><button (click)="save()">update</button> </td>
+        <td *ngIf="form.id==null"><button (click)="save()">save</button> </td>
+    </tr>
+</table>

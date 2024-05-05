@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div style="color: red;" align="center">
+    {{form.message}}
+</div>
+<h3 style="color: navy;" align="center">User-List</h3>
+<table bgColor="gainsboro">
+    <th>FirstName:-</th>
+    <input type="text" [(ngModel)]="form.search.firstName">&nbsp;
+    <th>LoginId:-</th>
+    <input type="text" [(ngModel)]="form.search.loginId">&nbsp;
+    <th>DOB:-</th>
+    <input type="date" [(ngModel)]="form.search.dob">&nbsp;
+    <th>Password:-</th>
+    <input type="text" [(ngModel)]="form.search.password">&nbsp;
+    <th>RoleName:-</th>
+    <td><select name=" roleId" [(ngModel)]="form.search.roleId">
+            <option [ngValue]="" value="undefined">{{'-----Select Role------'}}</option>
+            <option *ngFor="let obj of form.preload.roleList" [value]="obj.key">{{obj.value}}</option>
+        </select></td>
+    <button (click)="search()">search</button>&nbsp;&nbsp;&nbsp;
+    <button (click)="delete()">delete</button>
+</table>
+
+<table border="1" style="width: 100%;border: groove;" bgColor="gainsboro">
+    <tr align="center">
+        <th>S.NO.</th>
+        <th>Select</th>
+        <th>Image</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>LoginId</th>
+        <th>Password</th>
+        <th>DOB</th>
+        <th>RoleName</th>
+        <th>EDIT</th>
+    </tr>
+    <tr *ngFor="let m of form.list; let i=index" align="center">
+        <td>{{(form.pageNo*5)+i+1}}</td>
+        <td><input type="checkbox" (change)="select(m.id)"> </td>
+        <td><img src="http://localhost:8080/User/profilePic/{{m.id}}" height="55px" width="80px"></td>
+        <td>{{m.firstName}}</td>
+        <td>{{m.lastName}}</td>
+        <td>{{m.loginId}}</td>
+        <td>{{m.password}}</td>
+        <td>{{m.dob}}</td>
+        <td>{{m.roleName}}</td>
+        <td><a (click)="edit('/user/'+m.id)">edit</a></td>
+    </tr>
+</table>
+<td><button [disabled]="form.pageNo==0" (click)="previous()">previous</button></td>
+<td style="width:100%" align="right">
+    <button [disabled]="form.list.lenght<5" (click)="next()">next</button>
+</td>

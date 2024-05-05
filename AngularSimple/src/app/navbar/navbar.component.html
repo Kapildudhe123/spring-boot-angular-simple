@@ -1,0 +1,13 @@
+<div *ngIf="isLogin()">
+    <h3>Hi,{{form.data.fname}}({{form.data.rname}})</h3>|
+    <a href="/user">Add-User</a>|
+    <a href="/userlist">User-List</a>|
+    <a (click)="logout()">Logout</a>
+
+</div>
+
+<div *ngIf="!isLogin">
+    <h3>Hi,Guest</h3>
+
+</div>
+<hr>
